@@ -14,6 +14,11 @@ class SecurityBase
     XmlSimple.xml_in(xml)["LastPrice"].first.to_f
   end
 
+  def self.name(secname)
+    xml = self.memoize_xml(secname)
+    XmlSimple.xml_in(xml)["Name"].first
+  end
+
   def self.memoize_xml(secname)
     @xml_cache = {} if @xml_cache.nil?
     xml = @xml_cache[secname]
@@ -35,6 +40,10 @@ describe SecurityBase do
 
   it "Returns different prices for different stocks" do
     (SecurityBase.price("GOOG") - SecurityBase.price("AAPL")).wont_equal 0
+  end
+
+  it "Returns the name of the security" do
+    SecurityBase.name("MSFT").must_equal "Microsoft Corp"
   end
 
 

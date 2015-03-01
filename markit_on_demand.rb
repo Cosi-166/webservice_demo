@@ -6,7 +6,7 @@ result = Typhoeus.get("http://dev.markitondemand.com/Api/v2/Quote?symbol=msft")
 xml = result.response_body
 
 puts "**** Resultant XML from call to the markitondemand service"
-p xml
+puts xml
 puts
 
 hash = XmlSimple.xml_in(xml)

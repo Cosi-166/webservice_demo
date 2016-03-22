@@ -1,40 +1,41 @@
 require 'typhoeus'
-require 'xmlsimple'
-require 'pp'
 require 'minitest/autorun'
+require 'pry-byebug'
+require 'awesome_print'
 
 # This is a code sample. It has lots of room for improvement. Normally I
 # would not have the test in the same file as the class itself.
 
 class SecurityBase
-  MARKETONDEMANDURL = "http://dev.markitondemand.com/Api/v2/Quote?symbol=%s"
+  QUANDL_URL = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.json?order=asc&exclude_column_names=true&limit=1&column_index=4&rows=1&order=desc"
 
   def self.price(secname)
-    xml = self.memoize_xml(secname)
-    XmlSimple.xml_in(xml)["LastPrice"].first.to_f
+    json = self.memoize_json(secname)
+    json["dataset_data"]["data"][0][1]
   end
 
-  def self.name(secname)
-    xml = self.memoize_xml(secname)
-    XmlSimple.xml_in(xml)["Name"].first
-  end
+  # def self.name(secname)
+  #   binding.pry
+  #   json = self.memoize_json(secname)
+  # end
 
-  def self.memoize_xml(secname)
-    @xml_cache = {} if @xml_cache.nil?
-    xml = @xml_cache[secname]
-    if xml.nil?
-      xml = Typhoeus.get(MARKETONDEMANDURL % secname).response_body
-      @xml_cache[secname] = xml
+  def self.memoize_json(secname)
+    @json_cache = {} if @json_cache.nil?
+    json = @json_cache[secname]
+    if json.nil?
+      result = Typhoeus.get(QUANDL_URL % secname)
+      result_hash = JSON.parse(result.response_body)
+      @json_cache[secname] = result_hash
     end
-    xml
+    @json_cache[secname]
   end
-
 end
 
 
 describe SecurityBase do
 
   it "Can return the price of google" do
+    binding.pry
     SecurityBase.price("GOOG").must_be :>, 0
   end
 
@@ -42,9 +43,9 @@ describe SecurityBase do
     (SecurityBase.price("GOOG") - SecurityBase.price("AAPL")).wont_equal 0
   end
 
-  it "Returns the name of the security" do
-    SecurityBase.name("MSFT").must_equal "Microsoft Corp"
-  end
+  # it "Returns the name of the security" do
+  #   SecurityBase.name("MSFT").must_equal "Microsoft Corp"
+  # end
 
 
 end

@@ -1,24 +1,23 @@
 require 'json'
 require 'xmlsimple'
-require 'pry-byebug'
-
+require 'byebug'
 #
 # This example illustrates conversions between JSON, XML and Ruby Hashes which are often
 # required when working with web services.
 #
-puts "\n\n>>> Convert a ruby hash to json and vice versa"
 
 person_as_json_string = '{"name": "Pito", "town": "Arlington"}'
 person_as_ruby_hash = JSON.parse(person_as_json_string)
-puts person_as_ruby_hash
+puts "\n>>> Single person in JSON: #{person_as_ruby_hash}"
 
+puts "\n>>> Convert a ruby hash to json and vice versa"
 person_list_as_hash = '[{"name": "Pito", "town": "Arlington"},
                    {"name": "Chris", "town": "Willemstad"},
                    {"name": "Amin", "town": "Lafayette"}]'
 person_list_as_string = JSON.parse(person_list_as_hash)
 puts person_list_as_string
 
-puts "\n\n>>> Convert from from XML to JSON - via a Ruby Hash?"
+puts "\n>>> Convert from from XML to JSON - via a Ruby Hash?"
 
 person_as_xml_string = <<EOS
 <?xml version="1.0" encoding="UTF-8"?>
@@ -33,8 +32,7 @@ person_as_xml_string = <<EOS
 EOS
 
 xml_clean = person_as_xml_string.gsub(/\s/, '')
-
-xml_hash =  XmlSimple.xml_in(xml_clean , { 'ForceArray' => false })
+xml_hash =  XmlSimple.xml_in(xml_clean, {'ForceArray' => false})
 xml_json = xml_hash.to_json
 
 puts "Original String: #{person_as_xml_string}"

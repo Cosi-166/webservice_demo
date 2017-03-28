@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get "api/course_info/:course_code", to: 'api#course_info'
-  get "api/school_info/:school_code", to: 'api#school_info'
-  get "api/student_info/:student_code", to: 'api#student_info'
-
+  get "api/course_info/:course_code", to: 'api#course_info', defaults: { format: 'json'}
+  get "api/school_info/:school_code", to: 'api#school_info', defaults: { format: 'json'}
+  get "api/student_info/:student_code", to: 'api#student_info', defaults: { format: 'json'}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

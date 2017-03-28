@@ -18,8 +18,10 @@ gem xml-simple
 
 #### Demos
 
-* **RailsServiceDemo**: A very simple Rails application that illustrates how a Rails application can *serve* up a Webservice. It turns out to be just a controller which returns JSON.
 * **Json_xml_ruby.rb:** Working with Web Services will require various data formats. This example illustrates conversions between xml, json and text in Ruby.
-* **stockprice_api.rb:** Work with the quandl API retrieve stock prices and convert them from JSON to a hash.
+
+* **stockprice_api.rb:** Work with the quandl API retrieve stock prices and convert them from JSON to a hash. Illustrates getting data out of an API and manipulating it.
+
 * **memoize_tdd_stockprice.rb** Illustrate TDD and caching of data of stock prices
-* **weatherman_client.rb** Use of the weatherman API
+
+* **RailsServiceDemo**: A very simple Rails application that illustrates how a Rails application can *serve* up a Webservice. It turns out to be just a controller which returns JSON.

@@ -1,23 +1,18 @@
 require 'typhoeus'
 require 'minitest/autorun'
-require 'pry-byebug'
+require 'byebug'
 require 'awesome_print'
+require 'json'
 
-# This is a code sample. It has lots of room for improvement. Normally I
-# would not have the test in the same file as the class itself.
+# This code sample illustrates using an API, memoizing results, and writing unit tests.
 
 class SecurityBase
-  QUANDL_URL = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.json?order=asc&exclude_column_names=true&limit=1&column_index=4&rows=1&order=desc"
+  QUANDL_URL = "https://www.quandl.com/api/v3/datasets/WIKI/%s/data.json?order=asc&exclude_column_names=true&limit=1&column_index=4&rows=1&order=desc"
 
   def self.price(secname)
-    json = self.memoize_json(secname)
+    json = memoize_json(secname)
     json["dataset_data"]["data"][0][1]
   end
-
-  # def self.name(secname)
-  #   binding.pry
-  #   json = self.memoize_json(secname)
-  # end
 
   def self.memoize_json(secname)
     @json_cache = {} if @json_cache.nil?
@@ -31,21 +26,12 @@ class SecurityBase
   end
 end
 
-
 describe SecurityBase do
-
   it "Can return the price of google" do
-    binding.pry
     SecurityBase.price("GOOG").must_be :>, 0
   end
 
   it "Returns different prices for different stocks" do
     (SecurityBase.price("GOOG") - SecurityBase.price("AAPL")).wont_equal 0
   end
-
-  # it "Returns the name of the security" do
-  #   SecurityBase.name("MSFT").must_equal "Microsoft Corp"
-  # end
-
-
 end

@@ -5,6 +5,12 @@ require 'awesome_print'
 require 'json'
 
 # This code sample illustrates using an API, memoizing results, and writing unit tests.
+# Notice:
+# 1) need to find the right API to call
+# 2) need to understand its "syntax", including return datatype and convesions as needed
+# 3) need to cache so we don't overload the service
+# 4)need to write tests
+
 
 class SecurityBase
   QUANDL_URL = "https://www.quandl.com/api/v3/datasets/WIKI/%s/data.json?order=asc&exclude_column_names=true&limit=1&column_index=4&rows=1&order=desc"

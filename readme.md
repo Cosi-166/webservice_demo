@@ -6,11 +6,11 @@
 
 #### Summary
 
-Contains a series of examples for teaching and demonstrating how webservices work.
+Contains a series of examples for teaching and demonstrating how Webservices work.
 
 #### Courses
 
-Used at Brandeis Univesrity, Computer Science 105b and 166b
+Used at Brandeis University
 
 #### Dependencies
 

@@ -10,7 +10,7 @@ require 'json'
 # 2) need to understand its "syntax", including return datatype and convesions as needed
 # 3) need to cache so we don't overload the service
 # 4)need to write tests
-
+#
 
 class SecurityBase
   QUANDL_URL = "https://www.quandl.com/api/v3/datasets/WIKI/%s/data.json?order=asc&exclude_column_names=true&limit=1&column_index=4&rows=1&order=desc"

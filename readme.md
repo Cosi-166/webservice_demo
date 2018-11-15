@@ -24,4 +24,6 @@ gem xml-simple
 
 * **memoize_tdd_stockprice.rb** Illustrate TDD and caching of data of stock prices
 
-* **RailsServiceDemo**: A very simple Rails application that illustrates how a Rails application can *serve* up a Webservice. It turns out to be just a controller which returns JSON.
+* To see how this works within rails, here are two examples:
+  * [Fortune Cookie Api Example](https://github.com/pitosalas/fortune_api)
+  * [Rails RestAPI Demo](https://github.com/pitosalas/rails_restapi_demo)
